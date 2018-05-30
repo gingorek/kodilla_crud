@@ -1,7 +1,9 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.controller.TaskNotFoundException;
+import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.domain.TrelloCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,7 +44,7 @@ public class TrelloClient {
 
         return url;
     }
-
+    //GET Request
     public List<TrelloBoardDto> getTrelloBoards() {
 
         Optional<TrelloBoardDto[]> boardsResponse = Optional.ofNullable(restTemplate.getForObject(urlBuilder(),TrelloBoardDto[].class));
@@ -52,6 +54,22 @@ public class TrelloClient {
 //            return Arrays.asList(boardsResponse);
 //        }
 //        return new ArrayList<>();
+    }
+
+    //CREATE Request
+    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto){
+
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards")
+                .queryParam("key",trelloApiKey)
+                .queryParam("token",trelloApiToken)
+                .queryParam("name",trelloCardDto.getName())
+                .queryParam("desc",trelloCardDto.getDescription())
+                .queryParam("pos",trelloCardDto.getPos())
+                .queryParam("idList",trelloCardDto.getListId())
+                .queryParam("badges",trelloCardDto.getTrelloBadgesDto())
+                .build().encode().toUri();
+
+        return restTemplate.postForObject(url,null,CreatedTrelloCard.class);
     }
 
 }
