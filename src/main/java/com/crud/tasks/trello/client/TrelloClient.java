@@ -19,7 +19,6 @@ import java.util.Optional;
 
 @Component
 public class TrelloClient {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
     @Autowired
@@ -50,7 +49,6 @@ public class TrelloClient {
             return new ArrayList<>();
         }
     }
-
     //CREATE Request
 // Do trello wyslylamy request o stworzenie nowej karty/zadania. Body tego zadania jest
 // zawarte w klasie TrelloCardDto. Jak Trello wie co poszczegolne komonenty klasy TrelloCardDto
