@@ -2,6 +2,7 @@ package com.crud.tasks.trello.client;
 
 import com.crud.tasks.config.TrelloConfig;
 import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.TrelloBadgesDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import org.junit.Before;
@@ -37,6 +38,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloApiKey()).thenReturn("test");
         when(trelloConfig.getTrelloApiToken()).thenReturn("test");
+
     }
 
     @Test
@@ -66,7 +68,8 @@ public class TrelloClientTest {
                 "Test task",
                 "Test Description",
                 "top",
-                "test_id");
+                "test_id"
+                );
 
         URI uri = new URI ("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20Description&pos=top&idList=test_id");
 
@@ -74,10 +77,11 @@ public class TrelloClientTest {
                 "1",
                 "Test task",
                 "http://test.com"
+
         );
 
         when(restTemplate.postForObject(uri,null,CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
-
+        System.out.println(uri);
         //When
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
 

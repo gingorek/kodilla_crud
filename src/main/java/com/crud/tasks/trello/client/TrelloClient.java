@@ -53,10 +53,10 @@ public class TrelloClient {
 
     //CREATE Request
 // Do trello wyslylamy request o stworzenie nowej karty/zadania. Body tego zadania jest
-//   zawarte w klasie TrelloCardDto. Jak Trello wie co poszczegolne komonenty klasy TrelloCardDto
-//   oznaczaja? Otoz mapujemy je w Url ponizej - mowimy ze name,desc,pos,idList itd to w TrelloCardDto
-//    jest to i to.
-//    Typem zwracanym nam przez Trello jest CreatedTrelloCard
+// zawarte w klasie TrelloCardDto. Jak Trello wie co poszczegolne komonenty klasy TrelloCardDto
+// oznaczaja? Otoz mapujemy je w Url ponizej - mowimy ze name,desc,pos,idList itd to w TrelloCardDto
+// jest to i to.
+// Typem zwracanym nam przez Trello jest CreatedTrelloCard
 // Jest to reprezentacja danych Cards otrzymana z Trello ktora jest uzywana w naszej aplikacji
 
     public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto){
@@ -68,10 +68,9 @@ public class TrelloClient {
                 .queryParam("desc",trelloCardDto.getDescription())
                 .queryParam("pos",trelloCardDto.getPos())
                 .queryParam("idList",trelloCardDto.getListId())
-                //.queryParam("badges",trelloCardDto.getTrelloBadgesDto())
+//                .queryParam("badges",trelloCardDto.getTrelloBadgesDto())
                 .build().encode().toUri();
-
+        System.out.println(url);
         return restTemplate.postForObject(url,null,CreatedTrelloCard.class);
     }
-
 }
