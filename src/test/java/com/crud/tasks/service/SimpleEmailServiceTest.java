@@ -10,6 +10,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 
+import java.util.Optional;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -17,6 +19,38 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SimpleEmailServiceTest {
+    public class MyClass {
+        @Override
+        public String toString(){
+            return "Hello";
+        }
+
+    }
+    public class MyConsumer{
+        private MyClass myClass;
+
+        public MyConsumer(MyClass myClass) {
+            this.myClass = myClass;
+        }
+
+        public MyClass getMyClass() {
+            return myClass;
+        }
+
+        public void sayMyClassHello() {
+            if(myClass == null){
+                System.out.println("My class is null");
+            } else {
+                System.out.println(myClass);
+            }
+        }
+
+        public void sayMyClassOptionalHello() {
+            Optional<MyClass> myOptional = Optional.ofNullable(myClass);
+            System.out.println(myOptional.orElse(new MyClass()));
+        }
+    }
+
 
     @InjectMocks
     private SimpleEmailService simpleEmailService;
@@ -40,5 +74,12 @@ public class SimpleEmailServiceTest {
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
+    }
+    @Test
+    public void testOptional(){
+        MyClass myClass = new MyClass();
+        MyConsumer myConsumer = new MyConsumer(myClass);
+        myConsumer.sayMyClassHello();
+        myConsumer.sayMyClassOptionalHello();
     }
 }

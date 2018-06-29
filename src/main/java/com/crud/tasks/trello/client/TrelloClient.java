@@ -1,7 +1,7 @@
 package com.crud.tasks.trello.client;
 
 import com.crud.tasks.config.TrelloConfig;
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import org.slf4j.Logger;
@@ -39,6 +39,8 @@ public class TrelloClient {
     }
 
     //GET Request
+        //Wysylamy zadanie do zewnetrzengo Trello API do pobrania Tablic.
+        //Mozemy uzyskac kilka obiektow tablic dlatego objetkem zwracanym jest TrelloBoardDto[].
     public List<TrelloBoardDto> getTrelloBoards() {
 
         try {
@@ -50,14 +52,14 @@ public class TrelloClient {
         }
     }
     //CREATE Request
-// Do trello wyslylamy request o stworzenie nowej karty/zadania. Body tego zadania jest
-// zawarte w klasie TrelloCardDto. Jak Trello wie co poszczegolne komonenty klasy TrelloCardDto
-// oznaczaja? Otoz mapujemy je w Url ponizej - mowimy ze name,desc,pos,idList itd to w TrelloCardDto
-// jest to i to.
-// Typem zwracanym nam przez Trello jest CreatedTrelloCard
-// Jest to reprezentacja danych Cards otrzymana z Trello ktora jest uzywana w naszej aplikacji
+        // Do trello wyslylamy request o stworzenie nowej karty/zadania. Body tego zadania jest
+        // zawarte w klasie TrelloCardDto. Jak Trello wie co poszczegolne komonenty klasy TrelloCardDto
+        // oznaczaja? Otoz mapujemy je w Url ponizej - mowimy ze name,desc,pos,idList itd to w TrelloCardDto
+        // jest to i to.
+        // Typem zwracanym nam przez Trello jest CreatedTrelloCardDto
+        // Jest to reprezentacja danych Cards otrzymana z Trello ktora jest uzywana w naszej aplikacji
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto){
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto){
 
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key",trelloConfig.getTrelloApiKey())
@@ -69,6 +71,6 @@ public class TrelloClient {
 //                .queryParam("badges",trelloCardDto.getTrelloBadgesDto())
                 .build().encode().toUri();
         System.out.println(url);
-        return restTemplate.postForObject(url,null,CreatedTrelloCard.class);
+        return restTemplate.postForObject(url,null,CreatedTrelloCardDto.class);
     }
 }
