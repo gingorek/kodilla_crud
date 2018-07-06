@@ -7,18 +7,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TaskMapperTestSuite {
 
     @InjectMocks
     private TaskMapper taskMapper;
-
 
     @Test
     public void testMapToTaskMapper(){
@@ -59,5 +55,4 @@ public class TaskMapperTestSuite {
         Assert.assertEquals(3, taskDtoList.size());
         Assert.assertEquals("Vacation ToDo", taskDtoList.get(1).getTitle());
     }
-
 }

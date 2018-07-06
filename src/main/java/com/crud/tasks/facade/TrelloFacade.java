@@ -30,7 +30,6 @@ public class TrelloFacade {
 //        return trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
 //    }
 
-
     public List<TrelloBoardDto> fetchTrelloBoards(){
         List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
         List<TrelloBoard>filtredBoards = trelloValidator.validateTrelloBoards(trelloBoards);
@@ -41,12 +40,6 @@ public class TrelloFacade {
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
         trelloValidator.validateCard(trelloCard);
         return trelloService.createTrelloCard(trelloMapper.mapToCardDto(trelloCard));
-
     }
-
-
-
-
-
 
 }
