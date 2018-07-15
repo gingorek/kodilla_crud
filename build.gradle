@@ -31,8 +31,8 @@ dependencies {
 	compile('com.google.code.gson:gson:2.8.2')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	//	compile('mysql:mysql-connector-java')
-	compile('org.postgresql:postgresql')
+	compile('mysql:mysql-connector-java')
+//	compile('org.postgresql:postgresql')
 
 	//Swagger
 	compile('io.springfox:springfox-swagger2:2.7.0')
