@@ -7,8 +7,23 @@
 <body>
     <h1>First impression of my page</h1>
 
-    <!--/*@thymesVar id="variable" type="com.crud.tasks.controller.StaticWebPageController"*/-->
-    <span th:text="${variable}"></span>
-
+        <!--/*thymesVar id="variable" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+        <span th:text="${variable}"></span>
+    <br />
+        <!--/*@thymesVar id="one" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+        <!--/*@thymesVar id="two" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+        <span th:text="${one} + ${two}"></span>
+    <br />
+        <a>2+2= </a>
+        <!--/*@thymesVar id="two" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+        <span th:text="${two} + ${two}"></span>
+    <br />
+        <a>2*2+2= </a>
+        <!--/*@thymesVar id="two" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+        <span th:text="${two} * ${two} + ${two}"></span>
+    <br />
+        <a>2-2*2= </a>
+        <!--/*@thymesVar id="two" type="com.crud.tasks.controller.StaticWebPageController"*/-->
+    <span th:text="${two} - ${two} * ${two}"></span>
 </body>
 </html>
